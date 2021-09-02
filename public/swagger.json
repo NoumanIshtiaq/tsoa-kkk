@@ -1,0 +1,607 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"SaveUpdateResDoctor": {
+				"properties": {
+					"_id": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"phone": {
+						"type": "string"
+					},
+					"specialist": {
+						"type": "string"
+					},
+					"avatar": {
+						"type": "string"
+					},
+					"patient": {}
+				},
+				"required": [
+					"_id",
+					"name",
+					"email",
+					"phone",
+					"specialist"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"SaveReqDoctor": {
+				"description": "User objects allow you to associate actions performed in the system with the user that performed them.\nThe User object contains common information across every user in the system regardless of status and role.",
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string",
+						"description": "The name of the doctor used to register his account"
+					},
+					"phone": {
+						"type": "string",
+						"description": "The email the user used to register his account"
+					},
+					"password": {
+						"type": "string",
+						"description": "The phone number used to register his account"
+					},
+					"specialist": {
+						"type": "string"
+					},
+					"avatar": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"email",
+					"phone",
+					"password",
+					"specialist"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UpdateReqDoctor": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"phone": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					},
+					"specialist": {
+						"type": "string"
+					},
+					"avatar": {
+						"type": "string"
+					}
+				},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"SaveUpdateResPatient": {
+				"properties": {
+					"_id": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"phone": {
+						"type": "string"
+					},
+					"disease": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"_id",
+					"name",
+					"email",
+					"phone",
+					"disease"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"GetReqPatient": {
+				"properties": {
+					"_id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"_id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"DelReqPatient": {
+				"properties": {
+					"_id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"_id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UpdateReqPatient": {
+				"properties": {
+					"_id": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"phone": {
+						"type": "string"
+					},
+					"disease": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"avatar": {
+						"type": "string"
+					},
+					"doctor": {}
+				},
+				"required": [
+					"_id",
+					"doctor"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {
+			"jwt": {
+				"type": "http",
+				"scheme": "Bearer",
+				"name": "Authorization",
+				"in": "header"
+			},
+			"api_key": {
+				"type": "apiKey",
+				"name": "admin_token",
+				"in": "query"
+			}
+		}
+	},
+	"info": {
+		"title": "hospitalapi",
+		"version": "1.0.0",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {}
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/doctor/getdoctor": {
+			"post": {
+				"operationId": "Getdoctor",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SaveUpdateResDoctor"
+								}
+							}
+						}
+					}
+				},
+				"description": "description The route is for get the specific  doctor information",
+				"summary": "Get Doctor Info",
+				"tags": [
+					"doctor"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": []
+			}
+		},
+		"/doctor/getalldoctor": {
+			"get": {
+				"operationId": "GetallDoctor",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/SaveUpdateResDoctor"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"doctor"
+				],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
+				"parameters": []
+			}
+		},
+		"/doctor/savedoctor": {
+			"post": {
+				"operationId": "Savedoctor",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SaveUpdateResDoctor"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"doctor"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/SaveReqDoctor"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/doctor/updatedoctor": {
+			"put": {
+				"operationId": "Updatedoctor",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SaveUpdateResDoctor"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"doctor"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateReqDoctor"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/doctor/deletedoctor": {
+			"delete": {
+				"operationId": "Deletedoctor",
+				"responses": {
+					"200": {
+						"description": "Product Deleted",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"tags": [
+					"doctor"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": []
+			}
+		},
+		"/patient/getpatient": {
+			"post": {
+				"operationId": "Getpatient",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SaveUpdateResPatient"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"patient"
+				],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/GetReqPatient"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/patient/savepatient": {
+			"post": {
+				"operationId": "Savepatient",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SaveUpdateResPatient"
+								}
+							}
+						}
+					}
+				},
+				"summary": "Save the patient",
+				"tags": [
+					"patient"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"multipart/form-data": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"avatar": {
+										"type": "string",
+										"format": "binary"
+									},
+									"name": {
+										"type": "string"
+									},
+									"email": {
+										"type": "string"
+									},
+									"password": {
+										"type": "string"
+									},
+									"phone": {
+										"type": "string"
+									},
+									"disease": {
+										"type": "string"
+									},
+									"doctor": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"avatar",
+									"name",
+									"email",
+									"password",
+									"phone",
+									"disease"
+								]
+							}
+						}
+					}
+				}
+			}
+		},
+		"/patient/deletepatient": {
+			"delete": {
+				"operationId": "Deletepatient",
+				"responses": {
+					"200": {
+						"description": "patient deleted"
+					}
+				},
+				"tags": [
+					"patient"
+				],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/DelReqPatient"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/patient/updatepatient": {
+			"put": {
+				"operationId": "Updatepatient",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SaveUpdateResPatient"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"patient"
+				],
+				"security": [
+					{
+						"api_key": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"description": "request part",
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateReqPatient"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/patient/reportpatient": {
+			"get": {
+				"operationId": "Reportpatient",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SaveUpdateResPatient"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"patient"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/patient/uploadreportpatient": {
+			"post": {
+				"operationId": "Uploadrtpatient",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/SaveUpdateResPatient"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"patient"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"multipart/form-data": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"id": {
+										"type": "string"
+									},
+									"Report": {
+										"type": "string",
+										"format": "binary"
+									}
+								},
+								"required": [
+									"id",
+									"Report"
+								]
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}
